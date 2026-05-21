@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─────────────────────────────────────────────────────────
+   DB2 LUW Expert Recall Platform — Design System
+   Calm, neurodivergent-optimised, cognitively respectful
+   ───────────────────────────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Surface layers — deep navy foundation */
+  --color-surface-base:     #080c15;
+  --color-surface-panel:    #0d1220;
+  --color-surface-elevated: #121929;
+  --color-surface-hover:    #182035;
+  --color-surface-active:   #1e2940;
+
+  /* Borders — extremely subtle */
+  --color-border-subtle:   #141e32;
+  --color-border-default:  #1e2d45;
+  --color-border-strong:   #2a3f60;
+
+  /* Text hierarchy */
+  --color-text-primary:    #dde4f0;
+  --color-text-secondary:  #8a9bbf;
+  --color-text-muted:      #4a5a7a;
+  --color-text-code:       #7dd3fc;
+  --color-text-param:      #86efac;
+
+  /* Accents — measured, not aggressive */
+  --color-accent-blue:     #3b82f6;
+  --color-accent-blue-dim: #1d4ed8;
+  --color-accent-teal:     #0d9488;
+  --color-accent-amber:    #b45309;
+  --color-accent-red:      #b91c1c;
+  --color-accent-green:    #15803d;
+  --color-accent-purple:   #6d28d9;
+
+  /* Category palette — node backgrounds for concept atlas */
+  --color-cat-architecture: #0e2040;
+  --color-cat-memory:       #0a2030;
+  --color-cat-logging:      #201500;
+  --color-cat-hadr:         #180d35;
+  --color-cat-performance:  #081a10;
+  --color-cat-monitoring:   #101828;
+  --color-cat-locking:      #200808;
+  --color-cat-admin:        #141020;
+
+  /* Category border accents */
+  --color-cat-architecture-border: #1e4080;
+  --color-cat-memory-border:       #0d6080;
+  --color-cat-logging-border:      #604020;
+  --color-cat-hadr-border:         #3d1a80;
+  --color-cat-performance-border:  #0d5020;
+  --color-cat-monitoring-border:   #203060;
+  --color-cat-locking-border:      #801818;
+  --color-cat-admin-border:        #302050;
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Spacing scale extensions */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base reset ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Respect user reduced-motion preference — no animations by default */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus mode: extra reduced motion enforced by data attribute */
+[data-focus-mode="true"] *, [data-focus-mode="true"] *::before, [data-focus-mode="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ─── Typography ─────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-geist-mono), "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.875em;
+}
+
+/* ─── Scrollbars — minimal ───────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
+}
+
+/* ─── Selection ──────────────────────────────────────── */
+::selection {
+  background: rgba(59, 130, 246, 0.25);
+  color: var(--color-text-primary);
+}
+
+/* ─── React Flow overrides ───────────────────────────── */
+.react-flow__background {
+  background-color: var(--color-surface-base) !important;
+}
+.react-flow__pane {
+  cursor: default;
+}
+.react-flow__controls {
+  background: var(--color-surface-panel) !important;
+  border: 1px solid var(--color-border-default) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+.react-flow__controls-button {
+  background: var(--color-surface-panel) !important;
+  border-color: var(--color-border-default) !important;
+  color: var(--color-text-secondary) !important;
+  transition: none !important;
+}
+.react-flow__controls-button:hover {
+  background: var(--color-surface-hover) !important;
+  color: var(--color-text-primary) !important;
+}
+.react-flow__minimap {
+  background: var(--color-surface-panel) !important;
+  border: 1px solid var(--color-border-default) !important;
+  border-radius: 8px !important;
+}
+.react-flow__edge-path {
+  stroke-opacity: 0.5;
+}
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-opacity: 1;
+}
+
+/* ─── Terminal/code block ────────────────────────────── */
+.terminal-block {
+  background: #050810;
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  color: #a8c7fa;
+}
+
+.terminal-block .term-prompt { color: #5a6a8a; }
+.terminal-block .term-cmd    { color: #7dd3fc; }
+.terminal-block .term-param  { color: #86efac; }
+.terminal-block .term-value  { color: #fcd34d; }
+.terminal-block .term-output { color: #94a3b8; }
+.terminal-block .term-error  { color: #f87171; }
+.terminal-block .term-hadr   { color: #c084fc; }
+.terminal-block .term-ok     { color: #4ade80; }
+
+/* ─── Calm card surface ──────────────────────────────── */
+.calm-card {
+  background: var(--color-surface-panel);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+}
+.calm-card:hover {
+  border-color: var(--color-border-default);
+}
+
+/* ─── Confidence rating buttons ──────────────────────── */
+.confidence-btn {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: none;
+}
+.confidence-btn:hover   { background: var(--color-surface-hover); color: var(--color-text-primary); }
+.confidence-btn.level-1 { border-color: #6b2222; color: #f87171; }
+.confidence-btn.level-2 { border-color: #6b4c00; color: #fbbf24; }
+.confidence-btn.level-3 { border-color: #4a5020; color: #d4d870; }
+.confidence-btn.level-4 { border-color: #1a4a30; color: #4ade80; }
+.confidence-btn.level-5 { border-color: #1a3a6b; color: #60a5fa; }
