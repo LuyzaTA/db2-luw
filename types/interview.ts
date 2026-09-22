@@ -64,3 +64,34 @@ export interface DutchQuestion {
   avoid?: string[];
   followUps?: string[];
 }
+
+/* ─── Concept Library (IBM Interview) ──────────────────── */
+
+export type ConceptArea =
+  | "core"
+  | "dpf"
+  | "wlm"
+  | "openshift"
+  | "tuning"
+  | "diagnostics"
+  | "automation";
+
+export interface ConceptBlock {
+  heading: string;
+  body?: string;                 // Paragraphs separated by a blank line
+  bullets?: string[];
+  code?: { label?: string; content: string };
+  diagram?: string;              // DiagramKey
+}
+
+export interface TechConcept {
+  id: string;
+  area: ConceptArea;
+  title: string;
+  summary: string;
+  blocks: ConceptBlock[];
+  mustKnow: string[];            // Facts you must be able to state without hesitation
+  interviewAngle: string;        // How a panel turns this into a question
+  relatedQuizIds?: string[];
+  relatedScenarioIds?: string[];
+}

@@ -122,7 +122,7 @@ function Brief({ onGo }: { onGo: (t: Tab) => void }) {
             <p className="text-sm font-medium text-[var(--color-text-primary)]">On-site 3–5 days in Utrecht or Apeldoorn</p>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">Not technical, but a hard requirement. Prepare a clear, concrete answer.</p>
           </div>
-          <Link href="/dutch-interview" className="text-[10px] font-mono text-blue-400 hover:text-blue-300 sm:text-right whitespace-nowrap">Public-sector interview module →</Link>
+          <Link href="/ibm-interview/public-sector" className="text-[10px] font-mono text-blue-400 hover:text-blue-300 sm:text-right whitespace-nowrap">Public-sector interview module →</Link>
         </div>
       </div>
 
