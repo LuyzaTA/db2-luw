@@ -12,6 +12,8 @@ const NAV_ITEMS = [
   { href: "/recall",    label: "Recall",    short: "Recall" },
   { href: "/simulator", label: "Simulator", short: "Sim" },
   { href: "/commands",  label: "Commands",  short: "CMD" },
+  { href: "/interview", label: "Interview Readiness", short: "Prep" },
+  { href: "/dutch-interview", label: "Public Sector Interview", short: "Gov" },
 ];
 
 export function Header() {

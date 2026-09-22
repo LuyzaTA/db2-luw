@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { Map, Brain, AlertTriangle, Terminal, ArrowRight, Database, Activity } from "lucide-react";
+import { Map, Brain, AlertTriangle, Terminal, ArrowRight, Database, Activity, GraduationCap, MessagesSquare } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { DB2_CONCEPTS, CATEGORY_LABELS } from "@/lib/db2-concepts";
 import { DB2_INCIDENTS } from "@/lib/db2-incidents";
 import { DB2_COMMANDS } from "@/lib/db2-commands";
+import { QUIZ_QUESTIONS } from "@/lib/interview-quiz";
+import { PROBLEM_SCENARIOS } from "@/lib/interview-scenarios";
+import { DUTCH_QUESTIONS } from "@/lib/dutch-interview";
 
 const MODULES = [
   {
@@ -45,6 +48,26 @@ const MODULES = [
     accent: "border-green-900 hover:border-green-700",
     iconColor: "text-green-500",
     badge: "Commands",
+  },
+  {
+    href: "/interview",
+    icon: GraduationCap,
+    title: "Interview Readiness",
+    description: "Senior-panel preparation weighted toward performance & tuning: EXPLAIN, DPF, WLM, OpenShift, diagnostics, automation. Interview Mode exam and problem scenarios with hidden solutions.",
+    stats: `${QUIZ_QUESTIONS.length} questions · ${PROBLEM_SCENARIOS.length} scenarios`,
+    accent: "border-amber-900 hover:border-amber-700",
+    iconColor: "text-amber-500",
+    badge: "Interview",
+  },
+  {
+    href: "/dutch-interview",
+    icon: MessagesSquare,
+    title: "Public Sector Interview",
+    description: "Dutch public-sector interview (in English): technical, STAR, personal and challenging questions, BIO/AVG context, a mock interview drill and questions to ask.",
+    stats: `${DUTCH_QUESTIONS.length} questions · mock drill · briefing`,
+    accent: "border-orange-900 hover:border-orange-700",
+    iconColor: "text-orange-500",
+    badge: "Interview",
   },
 ];
 
