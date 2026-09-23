@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Eye, EyeOff, Menu, Database } from "lucide-react";
+import { Eye, EyeOff, Menu, Database, Sun, Moon, MonitorSmartphone } from "lucide-react";
 import { useSessionStore } from "@/lib/session-store";
+import { useTheme } from "@/lib/use-theme";
 import { cn } from "@/lib/cn";
 
 const NAV_ITEMS = [
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
 export function Header() {
   const pathname = usePathname();
   const { focusMode, toggleFocusMode, toggleSidebar } = useSessionStore();
+  const { preference, resolved, setTheme, toggle } = useTheme();
 
   return (
     <header className="flex items-center h-12 px-4 border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-panel)] shrink-0 z-10">
@@ -51,6 +53,22 @@ export function Header() {
 
       {/* Controls */}
       <div className="flex items-center gap-1 ml-4">
+        <button
+          onClick={toggle}
+          onDoubleClick={() => setTheme("system")}
+          title={
+            preference === "system"
+              ? `Theme: following your system (${resolved}). Click to switch.`
+              : `Theme: ${preference}. Click to switch, double-click to follow your system.`
+          }
+          aria-label="Toggle light or dark theme"
+          className="p-1.5 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] relative"
+        >
+          {resolved === "dark" ? <Moon size={14} /> : <Sun size={14} />}
+          {preference === "system" && (
+            <MonitorSmartphone size={8} className="absolute bottom-0.5 right-0.5 opacity-70" />
+          )}
+        </button>
         <button
           onClick={toggleFocusMode}
           title={focusMode ? "Exit focus mode" : "Enter focus mode"}

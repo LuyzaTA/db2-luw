@@ -63,11 +63,11 @@ function buildGraph(
         target: conn.targetId,
         label: conn.label,
         style: {
-          stroke: EDGE_COLORS[conn.type] ?? "#1e2d45",
+          stroke: EDGE_COLORS[conn.type] ?? "var(--color-border-default)",
           strokeWidth: 1.5,
         },
-        labelStyle: { fontSize: 9, fill: "#4a5a7a" },
-        labelBgStyle: { fill: "#0d1220", fillOpacity: 0.9 },
+        labelStyle: { fontSize: 9, fill: "var(--color-text-muted)" },
+        labelBgStyle: { fill: "var(--color-surface-panel)", fillOpacity: 0.9 },
         labelBgPadding: [3, 6] as [number, number],
         animated: false,
       });
@@ -187,7 +187,7 @@ export function ConceptAtlas() {
             variant={BackgroundVariant.Dots}
             gap={24}
             size={1}
-            color="#141e32"
+            color="var(--color-border-default)"
           />
           <Controls showInteractive={false} />
           <MiniMap
@@ -199,7 +199,7 @@ export function ConceptAtlas() {
                 hadr: "#3d1a80", performance: "#0d5020", monitoring: "#203060",
                 locking: "#801818", admin: "#302050",
               };
-              return colors[cat] ?? "#1e2d45";
+              return colors[cat] ?? "var(--color-border-strong)";
             }}
             maskColor="rgba(8,12,21,0.7)"
           />

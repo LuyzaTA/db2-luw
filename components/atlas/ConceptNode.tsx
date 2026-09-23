@@ -6,14 +6,14 @@ import { cn } from "@/lib/cn";
 import type { Db2Concept } from "@/types/db2";
 
 const CATEGORY_STYLES: Record<string, { bg: string; border: string; text: string; dot: string }> = {
-  architecture: { bg: "bg-[#0e2040]", border: "border-[#1e4080]", text: "text-blue-200",  dot: "bg-blue-500" },
-  memory:       { bg: "bg-[#0a2030]", border: "border-[#0d6080]", text: "text-teal-200",  dot: "bg-teal-500" },
-  logging:      { bg: "bg-[#201500]", border: "border-[#604020]", text: "text-amber-200", dot: "bg-amber-500" },
-  hadr:         { bg: "bg-[#180d35]", border: "border-[#3d1a80]", text: "text-purple-200",dot: "bg-purple-500" },
-  performance:  { bg: "bg-[#081a10]", border: "border-[#0d5020]", text: "text-green-200", dot: "bg-green-500" },
-  monitoring:   { bg: "bg-[#101828]", border: "border-[#203060]", text: "text-slate-200", dot: "bg-slate-400" },
-  locking:      { bg: "bg-[#200808]", border: "border-[#801818]", text: "text-red-200",   dot: "bg-red-500" },
-  admin:        { bg: "bg-[#141020]", border: "border-[#302050]", text: "text-violet-200",dot: "bg-violet-400" },
+  architecture: { bg: "bg-[var(--color-cat-architecture)]", border: "border-[var(--color-cat-architecture-border)]", text: "text-blue-200",  dot: "bg-blue-500" },
+  memory:       { bg: "bg-[var(--color-cat-memory)]", border: "border-[var(--color-cat-memory-border)]", text: "text-teal-200",  dot: "bg-teal-500" },
+  logging:      { bg: "bg-[var(--color-cat-logging)]", border: "border-[var(--color-cat-logging-border)]", text: "text-amber-200", dot: "bg-amber-500" },
+  hadr:         { bg: "bg-[var(--color-cat-hadr)]", border: "border-[var(--color-cat-hadr-border)]", text: "text-purple-200",dot: "bg-purple-500" },
+  performance:  { bg: "bg-[var(--color-cat-performance)]", border: "border-[var(--color-cat-performance-border)]", text: "text-green-200", dot: "bg-green-500" },
+  monitoring:   { bg: "bg-[var(--color-cat-monitoring)]", border: "border-[var(--color-cat-monitoring-border)]", text: "text-slate-200", dot: "bg-slate-400" },
+  locking:      { bg: "bg-[var(--color-cat-locking)]", border: "border-[var(--color-cat-locking-border)]", text: "text-red-200",   dot: "bg-red-500" },
+  admin:        { bg: "bg-[var(--color-cat-admin)]", border: "border-[var(--color-cat-admin-border)]", text: "text-violet-200",dot: "bg-violet-400" },
 };
 
 export interface ConceptNodeData {

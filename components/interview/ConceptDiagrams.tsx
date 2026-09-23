@@ -13,12 +13,12 @@ const C = {
   text: "var(--color-text-primary)",
   dim: "var(--color-text-secondary)",
   muted: "var(--color-text-muted)",
-  blue: "#3b82f6",
-  teal: "#0d9488",
-  amber: "#b45309",
-  red: "#b91c1c",
-  green: "#15803d",
-  purple: "#6d28d9",
+  blue: "var(--diag-blue)",
+  teal: "var(--diag-teal)",
+  amber: "var(--diag-amber)",
+  red: "var(--diag-red)",
+  green: "var(--diag-green)",
+  purple: "var(--diag-purple)",
 };
 
 export type DiagramKey =
@@ -167,7 +167,7 @@ const DIAGRAMS: Record<DiagramKey, { caption: string; render: () => React.JSX.El
               <text x={x + 75} y={190} textAnchor="middle" fill={C.text} fontSize={11} fontWeight={500}>Member {i + 1}</text>
               <text x={x + 75} y={205} textAnchor="middle" fill={C.muted} fontSize={9} fontFamily="monospace">own CPU · memory · disk</text>
               <rect x={x + 20} y={240 - heights[i] * 0.3} width={110} height={heights[i] * 0.3} rx={3} fill={i === 2 ? C.red : C.teal} opacity={0.55} />
-              <text x={x + 75} y={256} textAnchor="middle" fill={i === 2 ? "#fca5a5" : C.muted} fontSize={9}>
+              <text x={x + 75} y={256} textAnchor="middle" fill={i === 2 ? "var(--color-danger-ink)" : C.muted} fontSize={9}>
                 {i === 2 ? "skew: 3.5× rows" : "even share"}
               </text>
             </g>
@@ -352,7 +352,7 @@ const DIAGRAMS: Record<DiagramKey, { caption: string; render: () => React.JSX.El
           <Box x={470} y={230} w={160} h={40} label="TABLE: ORDERS" sub="" />
         </g>
         <rect x={20} y={278} width={680} height={34} rx={6} fill={C.panel} stroke={C.red} />
-        <Label x={32} y={299} text="Section actual at IXSCAN = 52 114 rows vs estimate 1.2 → correlation error → wrong join method above it. Fix the estimate, not just the operator." color="#fca5a5" anchor="start" size={10} />
+        <Label x={32} y={299} text="Section actual at IXSCAN = 52 114 rows vs estimate 1.2 → correlation error → wrong join method above it. Fix the estimate, not just the operator." color="var(--color-danger-ink)" anchor="start" size={10} />
       </svg>
     ),
   },

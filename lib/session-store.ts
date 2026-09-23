@@ -3,9 +3,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { SessionState, ConceptProgress, FamiliarityLevel } from "@/types/db2";
+
+export type ThemePreference = "system" | "light" | "dark";
 import { computeNextReview, defaultProgress } from "./spaced-repetition";
 
 interface SessionStore extends SessionState {
+  theme: ThemePreference;
+  setTheme: (theme: ThemePreference) => void;
+
   // Actions
   setLastModule: (module: string) => void;
   setLastConceptId: (id: string | null) => void;
@@ -18,7 +23,8 @@ interface SessionStore extends SessionState {
   resetSession: () => void;
 }
 
-const defaultState: SessionState = {
+const defaultState: SessionState & { theme: ThemePreference } = {
+  theme: "dark",           // dark-first by design; light is opt-in
   lastModule: "/",
   lastConceptId: null,
   lastIncidentId: null,
@@ -33,6 +39,8 @@ export const useSessionStore = create<SessionStore>()(
   persist(
     (set, get) => ({
       ...defaultState,
+
+      setTheme: (theme) => set({ theme }),
 
       setLastModule: (module) => set({ lastModule: module }),
       setLastConceptId: (id) => set({ lastConceptId: id }),
@@ -69,6 +77,7 @@ export const useSessionStore = create<SessionStore>()(
       name: "db2-recall-session",
       // Only persist these fields
       partialize: (state) => ({
+        theme: state.theme,
         lastModule: state.lastModule,
         lastConceptId: state.lastConceptId,
         lastIncidentId: state.lastIncidentId,

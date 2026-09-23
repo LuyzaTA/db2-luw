@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSessionStore } from "@/lib/session-store";
+import { useTheme } from "@/lib/use-theme";
 import { Header } from "./Header";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { focusMode } = useSessionStore();
+  useTheme();   // keeps <html data-theme> in sync with the stored preference
 
   return (
     <div

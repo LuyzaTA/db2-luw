@@ -222,3 +222,223 @@ code, pre, kbd, samp {
 .confidence-btn.level-3 { border-color: #4a5020; color: #d4d870; }
 .confidence-btn.level-4 { border-color: #1a4a30; color: #4ade80; }
 .confidence-btn.level-5 { border-color: #1a3a6b; color: #60a5fa; }
+
+/* ═════════════════════════════════════════════════════════
+   LIGHT MODE
+   Applied when <html data-theme="light">. Dark stays the default.
+
+   The components use two kinds of colour:
+     1. semantic vars  (var(--color-surface-panel), …)
+     2. Tailwind palette classes with a consistent role convention:
+          950/900 → tinted surfaces      800/700 → borders
+          600/500 → icons                400/300/200/100 → text on tints
+   Tailwind v4 compiles those utilities to var(--color-<hue>-<shade>),
+   so light mode re-maps the ramp: dark surface shades become light
+   tints, and light text shades become dark, readable ink.
+   ═════════════════════════════════════════════════════════ */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* ─── Semantic surfaces & text ─── */
+  --color-surface-base:     #f6f7fa;
+  --color-surface-panel:    #ffffff;
+  --color-surface-elevated: #f1f3f8;
+  --color-surface-hover:    #e8ecf4;
+  --color-surface-active:   #dde4f0;
+
+  --color-border-subtle:   #e4e8f0;
+  --color-border-default:  #ccd5e4;
+  --color-border-strong:   #a3b1c8;
+
+  --color-text-primary:    #101828;
+  --color-text-secondary:  #43536d;
+  --color-text-muted:      #6a7a94;
+  --color-text-code:       #0369a1;
+  --color-text-param:      #15803d;
+
+  /* ─── Concept atlas category surfaces ─── */
+  --color-cat-architecture: #eaf1fd;
+  --color-cat-memory:       #e6f4f8;
+  --color-cat-logging:      #fdf4e3;
+  --color-cat-hadr:         #f1ebfd;
+  --color-cat-performance:  #e8f7ec;
+  --color-cat-monitoring:   #eef1f7;
+  --color-cat-locking:      #fdebeb;
+  --color-cat-admin:        #f0ecfa;
+
+  --color-cat-architecture-border: #9dbdf0;
+  --color-cat-memory-border:       #8ec7dc;
+  --color-cat-logging-border:      #dcb779;
+  --color-cat-hadr-border:         #b49bea;
+  --color-cat-performance-border:  #8fcfa3;
+  --color-cat-monitoring-border:   #a8b6d4;
+  --color-cat-locking-border:      #e79a9a;
+  --color-cat-admin-border:        #b3a4dd;
+
+  /* ─── Palette re-map: blue ─── */
+  --color-blue-950: #eff6ff;
+  --color-blue-900: #93c5fd;
+  --color-blue-800: #60a5fa;
+  --color-blue-700: #2563eb;
+  --color-blue-600: #2563eb;
+  --color-blue-500: #2563eb;
+  --color-blue-400: #1d4ed8;
+  --color-blue-300: #1e40af;
+  --color-blue-200: #1e3a8a;
+  --color-blue-100: #172554;
+
+  /* ─── red ─── */
+  --color-red-950: #fef2f2;
+  --color-red-900: #fca5a5;
+  --color-red-800: #f87171;
+  --color-red-700: #dc2626;
+  --color-red-600: #dc2626;
+  --color-red-500: #dc2626;
+  --color-red-400: #b91c1c;
+  --color-red-300: #991b1b;
+  --color-red-200: #7f1d1d;
+  --color-red-100: #450a0a;
+
+  /* ─── green ─── */
+  --color-green-950: #f0fdf4;
+  --color-green-900: #86efac;
+  --color-green-800: #4ade80;
+  --color-green-700: #15803d;
+  --color-green-600: #16a34a;
+  --color-green-500: #16a34a;
+  --color-green-400: #15803d;
+  --color-green-300: #166534;
+  --color-green-200: #14532d;
+  --color-green-100: #052e16;
+
+  /* ─── amber ─── */
+  --color-amber-950: #fffbeb;
+  --color-amber-900: #fcd34d;
+  --color-amber-800: #fbbf24;
+  --color-amber-700: #b45309;
+  --color-amber-600: #d97706;
+  --color-amber-500: #c2670a;
+  --color-amber-400: #b45309;
+  --color-amber-300: #92400e;
+  --color-amber-200: #78350f;
+  --color-amber-100: #451a03;
+
+  /* ─── yellow ─── */
+  --color-yellow-950: #fefce8;
+  --color-yellow-900: #fde047;
+  --color-yellow-800: #facc15;
+  --color-yellow-700: #a16207;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-500: #a16207;
+  --color-yellow-400: #a16207;
+  --color-yellow-300: #854d0e;
+  --color-yellow-200: #713f12;
+
+  /* ─── orange ─── */
+  --color-orange-950: #fff7ed;
+  --color-orange-900: #fdba74;
+  --color-orange-800: #fb923c;
+  --color-orange-700: #c2410c;
+  --color-orange-600: #ea580c;
+  --color-orange-500: #ea580c;
+  --color-orange-400: #c2410c;
+  --color-orange-300: #9a3412;
+  --color-orange-200: #7c2d12;
+
+  /* ─── teal ─── */
+  --color-teal-950: #f0fdfa;
+  --color-teal-900: #5eead4;
+  --color-teal-800: #2dd4bf;
+  --color-teal-700: #0f766e;
+  --color-teal-600: #0d9488;
+  --color-teal-500: #0d9488;
+  --color-teal-400: #0f766e;
+  --color-teal-300: #115e59;
+  --color-teal-200: #134e4a;
+
+  /* ─── sky / purple ─── */
+  --color-sky-950: #f0f9ff;
+  --color-sky-700: #0369a1;
+  --color-sky-600: #0284c7;
+  --color-sky-500: #0284c7;
+  --color-sky-400: #0369a1;
+  --color-sky-300: #075985;
+
+  --color-purple-950: #faf5ff;
+  --color-purple-900: #d8b4fe;
+  --color-purple-800: #c084fc;
+  --color-purple-700: #7c3aed;
+  --color-purple-600: #7c3aed;
+  --color-purple-500: #7c3aed;
+  --color-purple-400: #6d28d9;
+  --color-purple-300: #5b21b6;
+
+  /* ─── neutrals used by badges ─── */
+  --color-slate-950: #f8fafc;
+  --color-slate-900: #cbd5e1;
+  --color-slate-800: #e2e8f0;
+  --color-slate-700: #94a3b8;
+  --color-slate-600: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-400: #475569;
+  --color-slate-300: #334155;
+  --color-slate-200: #1e293b;
+
+  --color-zinc-950: #fafafa;
+  --color-zinc-800: #e4e4e7;
+  --color-zinc-600: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-300: #3f3f46;
+  --color-zinc-200: #27272a;
+}
+
+/* Diagram accent that must flip (light-red ink on dark, deep red on light) */
+:root { --color-danger-ink: #fca5a5; }
+:root[data-theme="light"] { --color-danger-ink: #b91c1c; }
+
+/* ─── Terminal / code blocks ─── */
+:root[data-theme="light"] .terminal-block {
+  background: #f8fafc;
+  border-color: var(--color-border-default);
+  color: #1f2937;
+}
+:root[data-theme="light"] .terminal-block .term-prompt { color: #64748b; }
+:root[data-theme="light"] .terminal-block .term-cmd    { color: #0369a1; }
+:root[data-theme="light"] .terminal-block .term-param  { color: #15803d; }
+:root[data-theme="light"] .terminal-block .term-value  { color: #a16207; }
+:root[data-theme="light"] .terminal-block .term-output { color: #475569; }
+:root[data-theme="light"] .terminal-block .term-error  { color: #dc2626; }
+:root[data-theme="light"] .terminal-block .term-hadr   { color: #7c3aed; }
+:root[data-theme="light"] .terminal-block .term-ok     { color: #15803d; }
+
+/* ─── Confidence rating buttons ─── */
+:root[data-theme="light"] .confidence-btn.level-1 { border-color: #fca5a5; color: #b91c1c; }
+:root[data-theme="light"] .confidence-btn.level-2 { border-color: #fcd34d; color: #b45309; }
+:root[data-theme="light"] .confidence-btn.level-3 { border-color: #d9d97a; color: #6b7a1a; }
+:root[data-theme="light"] .confidence-btn.level-4 { border-color: #86efac; color: #15803d; }
+:root[data-theme="light"] .confidence-btn.level-5 { border-color: #93c5fd; color: #1d4ed8; }
+
+/* ─── Selection ─── */
+:root[data-theme="light"] ::selection {
+  background: rgba(37, 99, 235, 0.18);
+  color: var(--color-text-primary);
+}
+
+/* ─── Diagram accents (used by ConceptDiagrams) ─── */
+:root {
+  --diag-blue:   #3b82f6;
+  --diag-teal:   #0d9488;
+  --diag-amber:  #b45309;
+  --diag-red:    #b91c1c;
+  --diag-green:  #15803d;
+  --diag-purple: #6d28d9;
+}
+:root[data-theme="light"] {
+  --diag-blue:   #1d4ed8;
+  --diag-teal:   #0f766e;
+  --diag-amber:  #a2490a;
+  --diag-red:    #b91c1c;
+  --diag-green:  #15803d;
+  --diag-purple: #6d28d9;
+}
