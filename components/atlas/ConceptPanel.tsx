@@ -23,7 +23,7 @@ export function ConceptPanel({ concept, onClose, onNavigateTo }: ConceptPanelPro
     .filter(c => c.concept != null);
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-surface-panel)] border-l border-[var(--color-border-default)] w-96 overflow-hidden">
+    <div className="flex flex-col bg-[var(--color-surface-panel)] border-[var(--color-border-default)] overflow-hidden absolute inset-0 z-20 border-l-0 md:static md:z-auto md:h-full md:w-96 md:border-l">
       {/* Header */}
       <div className="flex items-start justify-between px-5 pt-5 pb-4 border-b border-[var(--color-border-subtle)]">
         <div className="flex-1 min-w-0 mr-3">

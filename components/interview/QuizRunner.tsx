@@ -149,7 +149,7 @@ export function QuizRunner() {
   /* ─── Setup ─────────────────────────────────────────── */
   if (phase === "setup") {
     return (
-      <div className="max-w-3xl mx-auto p-6 space-y-5">
+      <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <ModeCard
             active={mode === "exam"}
@@ -211,7 +211,7 @@ export function QuizRunner() {
     const missed = answered.filter(a => !a.isCorrect);
 
     return (
-      <div className="max-w-3xl mx-auto p-6 space-y-5">
+      <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-5">
         <div className={cn("border rounded-xl p-5", pct >= PASS_MARK ? "border-green-900 bg-green-950/40" : "border-amber-900 bg-amber-950/30")}>
           <p className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-1">
             {mode === "exam" ? "Interview Mode result" : "Study session result"}
@@ -237,7 +237,7 @@ export function QuizRunner() {
               const r = ok / inD.length;
               return (
                 <div key={d} className="flex items-center gap-3 text-xs">
-                  <span className="w-48 text-[var(--color-text-secondary)]">{DOMAIN_LABELS[d]}</span>
+                  <span className="w-24 sm:w-48 shrink-0 truncate text-[var(--color-text-secondary)]">{DOMAIN_LABELS[d]}</span>
                   <div className="flex-1 h-1.5 bg-[var(--color-surface-elevated)] rounded">
                     <div className={cn("h-1.5 rounded", r >= PASS_MARK ? "bg-green-600" : "bg-amber-600")} style={{ width: `${r * 100}%` }} />
                   </div>
@@ -275,8 +275,8 @@ export function QuizRunner() {
   const answeredThis = current.isCorrect !== null;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-4">
-      <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
+    <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs text-[var(--color-text-muted)]">
         <span className="font-mono">
           {mode === "exam" ? "INTERVIEW MODE" : "STUDY"} · {index + 1} / {attempts.length} · {DOMAIN_LABELS[q.domain]} · difficulty {q.difficulty}/5
         </span>

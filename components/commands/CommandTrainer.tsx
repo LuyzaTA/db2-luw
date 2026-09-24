@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Terminal } from "@/components/ui/Terminal";
 import { DB2_COMMANDS, COMMAND_CATEGORIES } from "@/lib/db2-commands";
 import type { CommandEntry } from "@/types/db2";
+import { BackBar } from "@/components/ui/BackBar";
 
 function normalizeCommand(cmd: string): string {
   return cmd.toLowerCase().replace(/\s+/g, " ").trim();
@@ -28,6 +29,7 @@ export function CommandTrainer() {
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCommand, setSelectedCommand] = useState<CommandEntry | null>(null);
+  const [mobileDetail, setMobileDetail] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -49,6 +51,7 @@ export function CommandTrainer() {
     setShowAnswer(false);
     setShowHint(false);
     setAttemptResult(null);
+    setMobileDetail(true);
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
@@ -76,7 +79,10 @@ export function CommandTrainer() {
   return (
     <div className="flex h-full">
       {/* Left: Command list */}
-      <div className="w-72 border-r border-[var(--color-border-subtle)] flex flex-col shrink-0">
+      <div className={cn(
+        "w-full md:w-72 border-r border-[var(--color-border-subtle)] flex-col shrink-0",
+        mobileDetail ? "hidden md:flex" : "flex"
+      )}>
         {/* Search */}
         <div className="p-3 border-b border-[var(--color-border-subtle)]">
           <div className="relative">
@@ -131,7 +137,9 @@ export function CommandTrainer() {
       </div>
 
       {/* Right: Trainer area */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className={cn("flex-1 overflow-y-auto", mobileDetail ? "block" : "hidden md:block")}>
+        {selectedCommand && <BackBar onBack={() => setMobileDetail(false)} label="All commands" />}
+        <div className="p-4 sm:p-6">
         {!selectedCommand ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <p className="text-sm text-[var(--color-text-muted)]">Select a command to begin recall training</p>
@@ -250,6 +258,7 @@ export function CommandTrainer() {
             )}
           </div>
         )}
+        </div>
       </div>
     </div>
   );

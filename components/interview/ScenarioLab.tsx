@@ -9,9 +9,11 @@ import { DOMAIN_LABELS } from "@/lib/interview-quiz";
 import { useInterviewStore } from "@/lib/interview-store";
 import type { InterviewDomain, ProblemScenario } from "@/types/interview";
 import { FilterChip } from "./QuizRunner";
+import { BackBar } from "@/components/ui/BackBar";
 
 export function ScenarioLab() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mobileDetail, setMobileDetail] = useState(false);
   const [domain, setDomain] = useState<InterviewDomain | "all">("all");
   const { scenarioChecks } = useInterviewStore();
 
@@ -21,7 +23,10 @@ export function ScenarioLab() {
 
   return (
     <div className="flex h-full">
-      <div className="w-72 border-r border-[var(--color-border-subtle)] flex flex-col shrink-0">
+      <div className={cn(
+        "w-full md:w-72 border-r border-[var(--color-border-subtle)] flex-col shrink-0",
+        mobileDetail ? "hidden md:flex" : "flex"
+      )}>
         <div className="px-3 py-2.5 border-b border-[var(--color-border-subtle)] flex flex-wrap gap-1">
           <FilterChip active={domain === "all"} onClick={() => setDomain("all")} label="All" />
           {domains.map(d => (
@@ -34,7 +39,7 @@ export function ScenarioLab() {
             return (
               <button
                 key={s.id}
-                onClick={() => setSelectedId(s.id)}
+                onClick={() => { setSelectedId(s.id); setMobileDetail(true); }}
                 className={cn(
                   "w-full text-left px-4 py-3 border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-hover)]",
                   selectedId === s.id && "bg-[var(--color-surface-hover)] border-l-2 border-l-amber-600"
@@ -54,9 +59,12 @@ export function ScenarioLab() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className={cn("flex-1 overflow-y-auto", mobileDetail ? "block" : "hidden md:block")}>
         {selected ? (
-          <ScenarioWorkspace key={selected.id} scenario={selected} />
+          <>
+            <BackBar onBack={() => setMobileDetail(false)} label="All scenarios" />
+            <ScenarioWorkspace key={selected.id} scenario={selected} />
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full text-center px-8">
             <ClipboardList size={32} className="text-[var(--color-text-muted)] mb-4" />
@@ -91,7 +99,7 @@ function ScenarioWorkspace({ scenario: s }: { scenario: ProblemScenario }) {
   };
 
   return (
-    <div className="p-6 space-y-5 max-w-3xl mx-auto">
+    <div className="p-4 sm:p-6 space-y-5 max-w-3xl mx-auto">
       <div className="border border-amber-900/70 bg-amber-950/20 rounded-xl p-4">
         <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-amber-400 mb-2">
           Problem scenario · {DOMAIN_LABELS[s.domain]} · difficulty {s.difficulty}/5

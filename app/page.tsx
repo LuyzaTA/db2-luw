@@ -65,7 +65,7 @@ export default function HomePage() {
   return (
     <AppShell>
       <div className="h-full overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
 
           {/* Header */}
           <div className="mb-10">
@@ -85,7 +85,7 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-3 mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
             {[
               { label: "Concepts",   value: DB2_CONCEPTS.length,  icon: Map },
               { label: "Categories", value: Object.keys(CATEGORY_LABELS).length, icon: Activity },

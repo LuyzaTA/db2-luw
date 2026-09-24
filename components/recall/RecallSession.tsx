@@ -246,7 +246,7 @@ export function RecallSession() {
                   </button>
                 ))}
               </div>
-              <div className="mt-3 grid grid-cols-5 gap-2">
+              <div className="mt-3 hidden sm:grid grid-cols-5 gap-2">
                 {([1, 2, 3, 4, 5] as FamiliarityLevel[]).map(rating => (
                   <p key={rating} className="text-[9px] text-[var(--color-text-muted)] text-center leading-tight">
                     {FAMILIARITY_DESCRIPTIONS[rating]}

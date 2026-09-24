@@ -51,7 +51,7 @@ export default function IbmInterviewPage() {
       <div className="flex flex-col h-full">
         <InterviewSubNav />
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-4xl mx-auto px-6 py-8 space-y-6">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
             <header>
               <div className="flex items-center gap-2.5 mb-3">
                 <Briefcase size={16} className="text-amber-500" />

@@ -16,7 +16,7 @@ export function InterviewSubNav() {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center gap-1 px-4 h-10 border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-panel)] shrink-0">
+    <div className="flex items-center gap-1 px-3 sm:px-4 h-10 border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-panel)] shrink-0 overflow-x-auto whitespace-nowrap">
       <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)] mr-3 hidden sm:inline">
         IBM Interview
       </span>

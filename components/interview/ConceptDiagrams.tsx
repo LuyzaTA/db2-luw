@@ -40,6 +40,7 @@ export function Diagram({ id }: { id: DiagramKey }) {
   return (
     <figure className="my-4 bg-[var(--color-surface-panel)] border border-[var(--color-border-subtle)] rounded-xl p-4 overflow-x-auto">
       <D.render />
+      <p className="sm:hidden text-[10px] text-[var(--color-text-muted)] mt-2 italic">Scroll sideways to see the whole diagram.</p>
       <figcaption className="text-[11px] text-[var(--color-text-muted)] mt-3 leading-relaxed">{D.caption}</figcaption>
     </figure>
   );
@@ -78,7 +79,15 @@ function Label({ x, y, text, color = C.muted, size = 10, anchor = "middle", mono
   return <text x={x} y={y} textAnchor={anchor} fill={color} fontSize={size} fontFamily={mono ? "monospace" : undefined}>{text}</text>;
 }
 
-const svgProps = (h: number) => ({ viewBox: `0 0 720 ${h}`, width: "100%", style: { maxWidth: 720, height: "auto" as const }, role: "img" as const });
+// Below sm, shrinking a 720-wide diagram makes the labels unreadable, so we
+// keep a minimum width and let the figure scroll horizontally instead.
+const svgProps = (h: number) => ({
+  viewBox: `0 0 720 ${h}`,
+  width: "100%",
+  className: "min-w-[600px] sm:min-w-0",
+  style: { maxWidth: 720, height: "auto" as const },
+  role: "img" as const,
+});
 
 /* ─── Diagrams ────────────────────────────────────────── */
 

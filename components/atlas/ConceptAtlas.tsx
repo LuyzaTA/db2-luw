@@ -136,11 +136,11 @@ export function ConceptAtlas() {
   const categories = [...new Set(DB2_CONCEPTS.map(c => c.category))];
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full relative">
       {/* Canvas */}
       <div className="flex-1 relative">
         {/* Category filter bar */}
-        <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
+        <div className="absolute top-2 left-2 right-2 z-10 flex gap-1.5 overflow-x-auto whitespace-nowrap pb-1 md:flex-wrap md:right-auto md:top-3 md:left-3 md:overflow-visible">
           <button
             onClick={() => setFilterCategory(null)}
             className={cn(
@@ -177,7 +177,7 @@ export function ConceptAtlas() {
           onNodeClick={onNodeClick}
           onPaneClick={onPaneClick}
           fitView
-          fitViewOptions={{ padding: 0.15 }}
+          fitViewOptions={{ padding: 0.15, minZoom: 0.5 }}   /* keep labels legible on phones; pan instead of shrinking */
           minZoom={0.3}
           maxZoom={2}
           defaultEdgeOptions={{ type: "smoothstep" }}
@@ -191,6 +191,7 @@ export function ConceptAtlas() {
           />
           <Controls showInteractive={false} />
           <MiniMap
+            className="hidden md:block"
             nodeColor={(n) => {
               const d = n.data as unknown as ConceptNodeData;
               const cat = d.concept?.category ?? "admin";

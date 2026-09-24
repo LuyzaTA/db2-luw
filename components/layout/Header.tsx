@@ -22,13 +22,13 @@ export function Header() {
   const { preference, resolved, setTheme, toggle } = useTheme();
 
   return (
-    <header className="flex items-center h-12 px-4 border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-panel)] shrink-0 z-10">
+    <header className="flex items-center h-12 px-3 sm:px-4 border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-panel)] shrink-0 z-10 gap-1">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2.5 mr-6 hover:opacity-80">
+      <Link href="/" className="flex items-center gap-2 mr-2 sm:mr-6 hover:opacity-80 shrink-0">
         <Database size={16} className="text-blue-500" />
         <span className="text-sm font-semibold tracking-tight text-[var(--color-text-primary)]">
           DB2 LUW
-          <span className="ml-1.5 text-[10px] font-mono text-[var(--color-text-muted)] tracking-widest">11.5 / 12</span>
+          <span className="ml-1.5 text-[10px] font-mono text-[var(--color-text-muted)] tracking-widest hidden sm:inline">11.5 / 12</span>
         </span>
       </Link>
 
@@ -52,7 +52,7 @@ export function Header() {
       </nav>
 
       {/* Controls */}
-      <div className="flex items-center gap-1 ml-4">
+      <div className="flex items-center gap-1 ml-2 sm:ml-4 shrink-0">
         <button
           onClick={toggle}
           onDoubleClick={() => setTheme("system")}
@@ -62,7 +62,7 @@ export function Header() {
               : `Theme: ${preference}. Click to switch, double-click to follow your system.`
           }
           aria-label="Toggle light or dark theme"
-          className="p-1.5 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] relative"
+          className="p-2 sm:p-1.5 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] relative"
         >
           {resolved === "dark" ? <Moon size={14} /> : <Sun size={14} />}
           {preference === "system" && (
@@ -73,7 +73,7 @@ export function Header() {
           onClick={toggleFocusMode}
           title={focusMode ? "Exit focus mode" : "Enter focus mode"}
           className={cn(
-            "p-1.5 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)]",
+            "p-2 sm:p-1.5 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)]",
             focusMode && "text-blue-400 hover:text-blue-300"
           )}
         >

@@ -9,6 +9,7 @@ import { useInterviewStore, type AnswerReadiness } from "@/lib/interview-store";
 import { TabButton } from "@/components/interview/InterviewPrep";
 import { FilterChip } from "@/components/interview/QuizRunner";
 import type { DutchCategory, DutchQuestion } from "@/types/interview";
+import { BackBar } from "@/components/ui/BackBar";
 
 type Tab = "questions" | "mock" | "briefing";
 
@@ -25,7 +26,7 @@ export function DutchInterview() {
   const [tab, setTab] = useState<Tab>("questions");
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-1 px-4 h-11 border-b border-[var(--color-border-subtle)] shrink-0">
+      <div className="flex items-center gap-1 px-3 sm:px-4 h-11 border-b border-[var(--color-border-subtle)] shrink-0 overflow-x-auto whitespace-nowrap">
         <TabButton active={tab === "questions"} onClick={() => setTab("questions")} icon={<MessagesSquare size={13} />} label={`Questions (${DUTCH_QUESTIONS.length})`} />
         <TabButton active={tab === "mock"} onClick={() => setTab("mock")} icon={<Mic size={13} />} label="Mock interview" />
         <TabButton active={tab === "briefing"} onClick={() => setTab("briefing")} icon={<BookMarked size={13} />} label="Briefing" />
@@ -45,6 +46,7 @@ export function DutchInterview() {
 function QuestionBank() {
   const [category, setCategory] = useState<DutchCategory | "all">("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mobileDetail, setMobileDetail] = useState(false);
   const { answerReadiness } = useInterviewStore();
 
   const list = category === "all" ? DUTCH_QUESTIONS : DUTCH_QUESTIONS.filter(q => q.category === category);
@@ -53,7 +55,10 @@ function QuestionBank() {
 
   return (
     <div className="flex h-full">
-      <div className="w-80 border-r border-[var(--color-border-subtle)] flex flex-col shrink-0">
+      <div className={cn(
+        "w-full md:w-80 border-r border-[var(--color-border-subtle)] flex-col shrink-0",
+        mobileDetail ? "hidden md:flex" : "flex"
+      )}>
         <div className="px-3 py-2.5 border-b border-[var(--color-border-subtle)] space-y-2">
           <div className="flex flex-wrap gap-1">
             <FilterChip active={category === "all"} onClick={() => setCategory("all")} label="All" />
@@ -69,7 +74,7 @@ function QuestionBank() {
             return (
               <button
                 key={q.id}
-                onClick={() => setSelectedId(q.id)}
+                onClick={() => { setSelectedId(q.id); setMobileDetail(true); }}
                 className={cn(
                   "w-full text-left px-4 py-3 border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-surface-hover)]",
                   selectedId === q.id && "bg-[var(--color-surface-hover)] border-l-2 border-l-orange-600"
@@ -85,9 +90,12 @@ function QuestionBank() {
           })}
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto">
+      <div className={cn("flex-1 overflow-y-auto", mobileDetail ? "block" : "hidden md:block")}>
         {selected ? (
-          <div className="max-w-3xl mx-auto p-6"><QuestionCard key={selected.id} q={selected} /></div>
+          <>
+            <BackBar onBack={() => setMobileDetail(false)} label="All questions" />
+            <div className="max-w-3xl mx-auto p-4 sm:p-6"><QuestionCard key={selected.id} q={selected} /></div>
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full text-center px-8">
             <MessagesSquare size={32} className="text-[var(--color-text-muted)] mb-4" />
@@ -233,7 +241,7 @@ function MockInterview() {
 
   if (!questions) {
     return (
-      <div className="max-w-2xl mx-auto p-6 space-y-4">
+      <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4">
         <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Mock interview</h2>
         <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
           {MOCK_SIZE} questions in a realistic order: introduction, technical, behavioural, personal/challenging, public sector, and closing.
@@ -251,7 +259,7 @@ function MockInterview() {
 
   if (index >= questions.length) {
     return (
-      <div className="max-w-2xl mx-auto p-6 space-y-4">
+      <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4">
         <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Mock interview complete</h2>
         <p className="text-sm text-[var(--color-text-secondary)]">Questions covered:</p>
         <ol className="list-decimal pl-5 space-y-1 text-sm text-[var(--color-text-secondary)]">
@@ -265,7 +273,7 @@ function MockInterview() {
 
   const q = questions[index];
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-4">
+    <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-4">
       <div className="flex items-center justify-between text-xs font-mono text-[var(--color-text-muted)]">
         <span>MOCK · {index + 1} / {questions.length}</span>
         {timed && (
@@ -286,7 +294,7 @@ function MockInterview() {
 
 function Briefing() {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-5">
+    <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-5">
       <div>
         <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Briefing</p>
         <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Dutch public-sector interview: context</h2>

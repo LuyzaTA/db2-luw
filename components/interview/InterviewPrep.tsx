@@ -56,7 +56,7 @@ export function InterviewPrep() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-1 px-4 h-11 border-b border-[var(--color-border-subtle)] shrink-0">
+      <div className="flex items-center gap-1 px-3 sm:px-4 h-11 border-b border-[var(--color-border-subtle)] shrink-0 overflow-x-auto whitespace-nowrap">
         <TabButton active={tab === "brief"} onClick={() => setTab("brief")} icon={<Target size={13} />} label="Brief" />
         <TabButton active={tab === "quiz"} onClick={() => setTab("quiz")} icon={<ListChecks size={13} />} label={`Quiz (${QUIZ_QUESTIONS.length})`} />
         <TabButton active={tab === "scenarios"} onClick={() => setTab("scenarios")} icon={<ClipboardList size={13} />} label={`Scenarios (${PROBLEM_SCENARIOS.length})`} />
@@ -84,7 +84,7 @@ function Brief({ onGo }: { onGo: (t: Tab) => void }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8 space-y-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
       <div>
         <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Interview Readiness · Senior Db2 LUW DBA</p>
         <h1 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">Dutch public sector: performance-focused role</h1>

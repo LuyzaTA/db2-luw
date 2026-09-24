@@ -442,3 +442,26 @@ code, pre, kbd, samp {
   --diag-green:  #15803d;
   --diag-purple: #6d28d9;
 }
+
+/* ─── Mobile ─────────────────────────────────────────────
+   iOS Safari zooms the page when a focused field is smaller
+   than 16px, which breaks the fixed app layout. Keep the
+   visual size of controls but the text at 16px on phones.
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* Long, unbreakable identifiers (MON_GET_…, paths) must not
+     widen the page; they scroll inside their own block instead. */
+  .terminal-block {
+    font-size: 0.75rem;
+  }
+}
+
+/* React Flow minimap mask follows the theme (its default is dark) */
+.react-flow__minimap-mask { fill: rgba(8, 12, 21, 0.6); }
+:root[data-theme="light"] .react-flow__minimap-mask { fill: rgba(148, 163, 184, 0.35); }

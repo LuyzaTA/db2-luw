@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { DB2_INCIDENTS } from "@/lib/db2-incidents";
 import { useSessionStore } from "@/lib/session-store";
 import type { Incident, InvestigationStep } from "@/types/db2";
+import { BackBar } from "@/components/ui/BackBar";
 
 type IncidentPhase = "briefing" | "investigating" | "resolution";
 
@@ -21,6 +22,7 @@ const SEVERITY_COLORS = {
 export function IncidentSimulator() {
   const { setLastIncidentId } = useSessionStore();
   const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
+  const [mobileDetail, setMobileDetail] = useState(false);
   const [phase, setPhase] = useState<IncidentPhase>("briefing");
   const [revealedSteps, setRevealedSteps] = useState<Set<string>>(new Set());
   const [showRootCause, setShowRootCause] = useState(false);
@@ -32,6 +34,7 @@ export function IncidentSimulator() {
     setRevealedSteps(new Set());
     setShowRootCause(false);
     setLastIncidentId(incident.id);
+    setMobileDetail(true);
   };
 
   const handleRevealStep = (stepId: string) => {
@@ -53,7 +56,10 @@ export function IncidentSimulator() {
   return (
     <div className="flex h-full">
       {/* Left: Incident list */}
-      <div className="w-72 border-r border-[var(--color-border-subtle)] flex flex-col shrink-0">
+      <div className={cn(
+        "w-full md:w-72 border-r border-[var(--color-border-subtle)] flex-col shrink-0",
+        mobileDetail ? "hidden md:flex" : "flex"
+      )}>
         {/* Category filter */}
         <div className="px-3 py-2.5 border-b border-[var(--color-border-subtle)] flex flex-wrap gap-1">
           <button
@@ -94,7 +100,8 @@ export function IncidentSimulator() {
       </div>
 
       {/* Right: Incident workspace */}
-      <div className="flex-1 overflow-y-auto">
+      <div className={cn("flex-1 overflow-y-auto", mobileDetail ? "block" : "hidden md:block")}>
+        {selectedIncident && <BackBar onBack={() => setMobileDetail(false)} label="All incidents" />}
         {!selectedIncident ? (
           <div className="flex flex-col items-center justify-center h-full text-center px-8">
             <AlertTriangle size={32} className="text-[var(--color-text-muted)] mb-4" />
@@ -102,7 +109,7 @@ export function IncidentSimulator() {
             <p className="text-xs text-[var(--color-text-muted)] mt-2 max-w-sm">Each scenario presents real production symptoms. Work through the investigation at your own pace — reveal steps as needed.</p>
           </div>
         ) : (
-          <div className="p-6 space-y-5 max-w-3xl mx-auto">
+          <div className="p-4 sm:p-6 space-y-5 max-w-3xl mx-auto">
             {/* Alert header */}
             <div className={cn("border rounded-xl p-4", SEVERITY_COLORS[selectedIncident.severity])}>
               <div className="flex items-start justify-between gap-4">

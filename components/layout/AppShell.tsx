@@ -10,7 +10,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="flex flex-col h-full"
+      className="flex flex-col h-[100dvh]"
       data-focus-mode={focusMode}
     >
       <Header />

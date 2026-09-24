@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { TECH_CONCEPTS, AREA_LABELS, AREA_VACANCY_LINE } from "@/lib/interview-concepts";
 import type { ConceptArea, ConceptBlock, TechConcept } from "@/types/interview";
 import { Diagram, type DiagramKey } from "./ConceptDiagrams";
+import { BackBar } from "@/components/ui/BackBar";
 
 const AREA_ORDER: ConceptArea[] = ["core", "tuning", "dpf", "wlm", "openshift", "diagnostics", "automation"];
 
@@ -22,12 +23,16 @@ const AREA_ACCENT: Record<ConceptArea, string> = {
 
 export function ConceptLibrary() {
   const [selectedId, setSelectedId] = useState<string>(TECH_CONCEPTS[0].id);
+  const [mobileDetail, setMobileDetail] = useState(false);
   const selected = TECH_CONCEPTS.find(c => c.id === selectedId) ?? TECH_CONCEPTS[0];
 
   return (
     <div className="flex h-full">
       {/* Index */}
-      <div className="w-72 border-r border-[var(--color-border-subtle)] overflow-y-auto shrink-0">
+      <div className={cn(
+        "w-full md:w-72 border-r border-[var(--color-border-subtle)] overflow-y-auto shrink-0",
+        mobileDetail ? "hidden md:block" : "block"
+      )}>
         {AREA_ORDER.map(area => {
           const items = TECH_CONCEPTS.filter(c => c.area === area);
           if (!items.length) return null;
@@ -39,7 +44,7 @@ export function ConceptLibrary() {
               {items.map(c => (
                 <button
                   key={c.id}
-                  onClick={() => setSelectedId(c.id)}
+                  onClick={() => { setSelectedId(c.id); setMobileDetail(true); }}
                   className={cn(
                     "w-full text-left px-4 py-2.5 border-b border-[var(--color-border-subtle)] border-l-2 border-l-transparent hover:bg-[var(--color-surface-hover)]",
                     selectedId === c.id && cn("bg-[var(--color-surface-hover)]", AREA_ACCENT[c.area])
@@ -54,7 +59,8 @@ export function ConceptLibrary() {
       </div>
 
       {/* Reading pane */}
-      <div className="flex-1 overflow-y-auto">
+      <div className={cn("flex-1 overflow-y-auto", mobileDetail ? "block" : "hidden md:block")}>
+        <BackBar onBack={() => setMobileDetail(false)} label="All concepts" />
         <ConceptView key={selected.id} concept={selected} />
       </div>
     </div>
@@ -63,7 +69,7 @@ export function ConceptLibrary() {
 
 function ConceptView({ concept }: { concept: TechConcept }) {
   return (
-    <article className="max-w-3xl mx-auto px-6 py-8 space-y-5">
+    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-5">
       <header className="space-y-3">
         <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)]">{AREA_LABELS[concept.area]}</p>
         <h1 className="text-xl font-semibold text-[var(--color-text-primary)] leading-tight">{concept.title}</h1>
